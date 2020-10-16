@@ -8,7 +8,7 @@ class Client
 
     public function __construct($config)
     {
-        $this->config;
+        $this->config = $config;
     }
 
     public function show()

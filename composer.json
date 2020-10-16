@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ZengJJ\\UcClient\\": "src"
+            "ZengJJ\\UcClient\\": "src/"
         }
     },
     "autoload-dev": {

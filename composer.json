@@ -1,5 +1,5 @@
 {
-    "name": "zeng/uc-client",
+    "name": "zengjj/uc-client",
     "description": "user center access client.",
     "type": "library",
     "require": {

@@ -9,24 +9,65 @@ class ObjectBase
      */
     public $config;
     /**
-     * @var string $web_host
+     * @var string $base_url
      */
-    public $web_host;
-    /**
-     * @var string $api_host
-     */
-    public $api_host;
+    public $base_url;
 
     public function __construct(array $config = [])
     {
         $this->config = $config;
-        if (empty($this->web_host) && !isset($config['web_host'])) {
-            throw new \Exception('缺失必要参数 web_host');
+        if (isset($config['base_url'])) {
+            $this->setBaseUrl($config['base_url']);
         }
-        if (empty($this->api_host) && !isset($config['api_host'])) {
-            throw new \Exception('缺失必要参数 api_host');
+    }
+
+    public function setBaseUrl($base_url)
+    {
+        if (!$this->hasHttpOrHttps($base_url)) {
+            $base_url = ($this->isHttps() ? 'https://' : 'http://') . $base_url;
         }
-        $this->web_host = $this->web_host ?: $config['web_host'];
-        $this->api_host = $this->api_host ?: $config['api_host'];
+
+        $this->base_url = $base_url;
+    }
+
+    public function getUrl($uri)
+    {
+        if ($this->hasHttpOrHttps($uri)) {
+            return $uri;
+        }
+
+        return rtrim(strval($this->base_url), '/') . '/' . ltrim(strval($uri), '/');
+    }
+
+    /**
+     * 判断链接是否携带了 http 或 https
+     * @param $url
+     * @return bool
+     */
+    public function hasHttpOrHttps($url)
+    {
+        $preg = "/^http(s)?:\\/\\/.+/";
+        if (preg_match($preg, $url)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 判断是否为 https
+     * @return bool
+     */
+    public function isHttps()
+    {
+        if (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
+            return true;
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+            return true;
+        } elseif (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off') {
+            return true;
+        }
+
+        return false;
     }
 }

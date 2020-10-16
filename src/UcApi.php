@@ -4,7 +4,7 @@
 namespace ZengJJ\UcClient;
 
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 
 class UcApi extends ObjectBase
 {
@@ -18,7 +18,6 @@ class UcApi extends ObjectBase
         parent::__construct($config);
 
         $this->client = new Client();
-        $this->client->setBaseUrl($this->api_host);
     }
 
     /**
@@ -30,21 +29,17 @@ class UcApi extends ObjectBase
      */
     public function request($uri, $params = array(), $method = 'GET'): array
     {
-        $request = $this->client->createRequest($method, $uri);
-        if (!empty($params)) {
-            $query = $request->getQuery();
-            foreach ($params as $k => $v) {
-                $query->set($k, $v);
-            }
-        }
-        $response = $request->send();
+        $response = $this->client->request($method, $this->getUrl($uri), [
+            'form_params' => $params
+        ]);
+
         if (empty($response)) {
             throw new \Exception('请求失败');
         }
         if ($response->getStatusCode() != 200) {
             throw new \Exception('请求错误：' . $response->getStatusCode());
         }
-        $result = json_decode($response->getBody(true), true);
+        $result = json_decode($response->getBody(), true);
         if (empty($result) || $result['code'] != 0) {
             throw new \Exception(empty($result['message']) ? '数据有误' : $result['message']);
         }
@@ -58,7 +53,7 @@ class UcApi extends ObjectBase
      * @return array
      * @throws \Exception
      */
-    public function sync($token)
+    public function getUserByToken($token)
     {
         if (empty($token)) {
             throw new \Exception('Token 不能为空');
@@ -77,7 +72,7 @@ class UcApi extends ObjectBase
      */
     public function reportError($content, $data = array(), $category = 'global', $level = 1)
     {
-         return $this->request('/index/error-log', [
+        return $this->request('/index/error-log', [
             "host" => $_SERVER['HTTP_HOST'],
             "content" => $content ?: '错误',
             "data" => $data,

@@ -2,7 +2,7 @@
 
 namespace ZengJJ\UcClient;
 
-class Client
+class Object
 {
     public $config;
 

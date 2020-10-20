@@ -3,7 +3,6 @@
 
 namespace ZengJJ\UcClient;
 
-
 use GuzzleHttp\Client;
 
 class UcApi extends ObjectBase

@@ -70,4 +70,18 @@ class ObjectBase
 
         return false;
     }
+
+    /**
+     * 获取当前地址
+     * @return string
+     */
+    public function currentUrl()
+    {
+        $pageURL = ($this->isHttps() ? 'https' : 'http') . "://";
+        $pageURL .= $_SERVER["SERVER_NAME"];
+        $pageURL .= ($_SERVER["SERVER_PORT"] != 80) ? (':' . $_SERVER["SERVER_PORT"]) : '';
+        $pageURL .= $_SERVER["REQUEST_URI"];
+
+        return $pageURL;
+    }
 }

@@ -7,11 +7,15 @@ class ObjectBase
     /**
      * @var array $config
      */
-    public $config;
+    private $config;
     /**
      * @var string $base_url
      */
-    public $base_url;
+    private $base_url;
+    /**
+     * @var string $app_key
+     */
+    public $app_key;
 
     public function __construct(array $config = [])
     {
@@ -19,6 +23,14 @@ class ObjectBase
         if (isset($config['base_url'])) {
             $this->setBaseUrl($config['base_url']);
         }
+        if (isset($config['app_key'])) {
+            $this->app_key = $config['app_key'];
+        }
+    }
+
+    public function setAppKey($app_key)
+    {
+        $this->app_key = $app_key;
     }
 
     public function setBaseUrl($base_url)

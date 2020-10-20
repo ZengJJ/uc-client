@@ -33,6 +33,11 @@ class UcApi extends ObjectBase
         return $this->request('/user/info', ['token' => $token]);
     }
 
+    public function updateUser($token, $params)
+    {
+        return [];
+    }
+
     /**
      * 错误上报
      * @param $content

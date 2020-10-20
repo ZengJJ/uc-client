@@ -11,19 +11,18 @@ class UcWeb extends ObjectBase
      * @param $app_url
      * @return string
      */
-    public function thirdUrl($app_key, $app_url)
+    public function thirdUrl($app_url = '')
     {
-        return $this->getUrl('/third?app_key=' . $app_key . '&app_url=' . urlencode($app_url));
+        return $this->getUrl('/third?app_key=' . $this->app_key . '&app_url=' . urlencode($app_url));
     }
 
     /**
      * 同步登出
-     * @param $token
-     * @return array
-     * @throws \Exception
+     * @param $app_url
+     * @return string
      */
-    public function syncLogout()
+    public function syncLogout($app_url = '')
     {
-        return $this->request('/third/logout');
+        return $this->getUrl('/third/logout?app_key=' . $this->app_key . '&app_url=' . urlencode($app_url));
     }
 }

@@ -30,7 +30,7 @@ class UcApi extends ObjectBase
         if (empty($token)) {
             throw new \Exception('Token 不能为空');
         }
-        return $this->request('/user/info', ['token' => $token]);
+        return $this->request('/user/info', ['app_key' => $this->app_key, 'token' => $token]);
     }
 
     public function updateUser($token, $params)
@@ -50,6 +50,7 @@ class UcApi extends ObjectBase
     public function reportError($content, $data = array(), $category = 'global', $level = 1)
     {
         return $this->request('/index/error-log', [
+            "app_key" => $this->app_key,
             "host" => $_SERVER['HTTP_HOST'],
             "content" => $content ?: '错误',
             "data" => $data,

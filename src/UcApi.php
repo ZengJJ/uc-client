@@ -20,12 +20,31 @@ class UcApi extends ObjectBase
     }
 
     /**
-     * 同步用户数据
+     * 同步用户密码
+     * @param $token
+     * @param $pwd
+     * @return array
+     * @throws \Exception
+     */
+    public function userSyncAppPwd($token, $pwd)
+    {
+        if (empty($token)) {
+            throw new \Exception('Token 不能为空');
+        }
+        return $this->request('/user/sync-app-pwd', [
+            'app_key' => $this->app_key,
+            'token' => $token,
+            'pwd' => $pwd
+        ]);
+    }
+
+    /**
+     * 获取用户数据
      * @param $token
      * @return array
      * @throws \Exception
      */
-    public function getUserByToken($token)
+    public function userInfo($token)
     {
         if (empty($token)) {
             throw new \Exception('Token 不能为空');

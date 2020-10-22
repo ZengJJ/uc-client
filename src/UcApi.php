@@ -18,6 +18,37 @@ class UcApi extends ObjectBase
 
         $this->client = new Client();
     }
+    
+    /**
+     * 通过应用信息推送企业微信消息
+     * @param $token
+     * @param $to_app_key
+     * @param $to_user_key // uc_id 或者 phone
+     * @param $title
+     * @param $desc
+     * @param $url
+     * @param array $content
+     * @return array
+     * @throws \Exception
+     */
+    public function userSendWorkCorpMsgByApp($token, $to_app_key, $to_user_key, $title, $desc, $url, $content = [])
+    {
+        if (empty($token)) {
+            throw new \Exception('Token 不能为空');
+        }
+
+        return $this->request('/user/send-work-corp-msg-by-app', [
+            'app_key' => $this->app_key,
+            'token' => $token,
+            'to_app_key' => $to_app_key,
+            'to_user_key' => $to_user_key,
+            'content' => array_merge([
+                'title' => $title,
+                'desc' => $desc,
+                'url' => $url
+            ], $content),
+        ]);
+    }
 
     /**
      * 同步用户密码

@@ -21,7 +21,7 @@ class UcWeb extends ObjectBase
      * @param $app_url
      * @return string
      */
-    public function syncLogout($app_url = '')
+    public function thirdLogout($app_url = '')
     {
         return $this->getUrl('/third/logout?app_key=' . $this->app_key . '&app_url=' . urlencode($app_url));
     }

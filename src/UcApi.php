@@ -18,35 +18,49 @@ class UcApi extends ObjectBase
 
         $this->client = new Client();
     }
-    
+
     /**
-     * 通过应用信息推送企业微信消息
-     * @param $token
-     * @param $to_app_key
-     * @param $to_user_key // uc_id 或者 phone
-     * @param $title
-     * @param $desc
-     * @param $url
-     * @param array $content
+     * 推送企业微信消息
+     * @param $app_token
+     * @param $data
+     * @param string $object
      * @return array
      * @throws \Exception
      */
-    public function userSendWorkCorpMsgByApp($token, $to_app_key, $to_user_key, $title, $desc, $url, $content = [])
+    public function appSendWorkCorpMsg($app_token, $object = WorkCorpMsg::MSG_OBJECT_TEXT, $properties = WorkCorpMsg::MSG_OBJECT_TEXT_PROPERTIES)
+    {
+        if (empty($app_token)) {
+            throw new \Exception('App Token 不能为空');
+        }
+
+        return $this->request('/app/send-work-corp-msg', [
+            'app_token' => $app_token,
+            'object' => $object,
+            'properties' => $properties,
+        ]);
+    }
+
+    /**
+     * 发送消息
+     * @param $token
+     * @param $to_app_key
+     * @param $to_user_key
+     * @param $content
+     * @return array
+     * @throws \Exception
+     */
+    public function userSendMsg($token, $to_app_key, $to_user_key, $content)
     {
         if (empty($token)) {
             throw new \Exception('Token 不能为空');
         }
 
-        return $this->request('/user/send-work-corp-msg-by-app', [
+        return $this->request('/user/send-msg', [
             'app_key' => $this->app_key,
             'token' => $token,
             'to_app_key' => $to_app_key,
             'to_user_key' => $to_user_key,
-            'content' => array_merge([
-                'title' => $title,
-                'desc' => $desc,
-                'url' => $url
-            ], $content),
+            'content' => $content,
         ]);
     }
 
@@ -105,6 +119,24 @@ class UcApi extends ObjectBase
     public function updateUser($token, $params)
     {
         return [];
+    }
+
+    public function getUserToken()
+    {
+    }
+
+    /**
+     * 获取应用的 TOKEN
+     * @param $app_secret
+     * @return array
+     * @throws \Exception
+     */
+    public function getAppToken($app_secret)
+    {
+        if (empty($app_secret)) {
+            throw new \Exception('Secret 不能为空');
+        }
+        return $this->request('/index/get-app-token', ['app_key' => $this->app_key, 'app_secret' => $app_secret]);
     }
 
     /**

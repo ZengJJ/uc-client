@@ -4,7 +4,7 @@ namespace ZengJJ\UcClient\api;
 
 use ZengJJ\UcClient\UcApi;
 
-class User extends UcApi
+class ApiUser extends UcApi
 {
     /**
      * 发送消息

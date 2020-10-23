@@ -5,7 +5,7 @@ namespace ZengJJ\UcClient\api;
 use ZengJJ\UcClient\UcApi;
 use ZengJJ\UcClient\WorkCorpMsg;
 
-class App extends UcApi
+class ApiApp extends UcApi
 {
     /**
      * 推送企业微信消息

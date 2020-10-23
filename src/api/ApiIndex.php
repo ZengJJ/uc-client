@@ -4,7 +4,7 @@ namespace ZengJJ\UcClient\api;
 
 use ZengJJ\UcClient\UcApi;
 
-class Index extends UcApi
+class ApiIndex extends UcApi
 {
     public function getUserToken()
     {

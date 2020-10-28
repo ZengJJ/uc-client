@@ -10,9 +10,9 @@ class ApiApp extends UcApi
     /**
      * 极光推送
      * @param $app_token
-     * @param string $registration_id 极光分配的ID
-     * @param string $alias 别名（手机号）
      * @param string $content 内容
+     * @param string $alias 别名（一般为手机号）
+     * @param string $registration_id 极光分配的ID
      * @return array
      * @throws \Exception
      */

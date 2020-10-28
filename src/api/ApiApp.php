@@ -16,10 +16,13 @@ class ApiApp extends UcApi
      * @return array
      * @throws \Exception
      */
-    public function jgPush($app_token, $registration_id, $alias, $content)
+    public function jgPush($app_token, $content, $alias = null, $registration_id = null)
     {
-        if (empty($app_token) || empty($content) || (empty($registration_id) && empty($alias))) {
+        if (empty($app_token) || empty($content)) {
             throw new \Exception('缺失必要参数');
+        }
+        if (empty($registration_id) && empty($alias)) {
+            throw new \Exception('registration_id 和 alias 不能同时为空');
         }
 
         return $this->request('/app/jg-push', [
@@ -67,7 +70,7 @@ class ApiApp extends UcApi
     public function sendWorkCorpMsg($app_token, $phone, $internal = WorkCorpMsg::APP_INTERNAL_YES, $object = WorkCorpMsg::MSG_OBJECT_TEXT, $properties = WorkCorpMsg::MSG_OBJECT_TEXT_PROPERTIES)
     {
         if (empty($app_token) || empty($phone)) {
-            throw new \Exception('App Token 和 phone 不能为空');
+            throw new \Exception('缺失必要参数');
         }
 
         return $this->request('/app/send-work-corp-msg', [

@@ -18,7 +18,7 @@ class ApiUser extends UcApi
     public function sendMsg($token, $to_app_key, $to_user_key, $content)
     {
         if (empty($token)) {
-            throw new \Exception('Token 不能为空');
+            throw new \Exception('缺失必要参数');
         }
         return $this->request('/user/send-msg', [
             'app_key' => $this->app_key,
@@ -39,7 +39,7 @@ class ApiUser extends UcApi
     public function syncAppPwd($token, $pwd)
     {
         if (empty($token)) {
-            throw new \Exception('Token 不能为空');
+            throw new \Exception('缺失必要参数');
         }
         return $this->request('/user/sync-app-pwd', [
             'app_key' => $this->app_key,
@@ -58,7 +58,7 @@ class ApiUser extends UcApi
     public function checkAppPwd($token, $pwd)
     {
         if (empty($token)) {
-            throw new \Exception('Token 不能为空');
+            throw new \Exception('缺失必要参数');
         }
         return $this->request('/user/check-app-pwd', [
             'app_key' => $this->app_key,
@@ -76,7 +76,7 @@ class ApiUser extends UcApi
     public function info($token)
     {
         if (empty($token)) {
-            throw new \Exception('Token 不能为空');
+            throw new \Exception('缺失必要参数');
         }
         return $this->request('/user/info', ['app_key' => $this->app_key, 'token' => $token]);
     }

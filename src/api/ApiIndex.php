@@ -16,7 +16,7 @@ class ApiIndex extends UcApi
     public function getUserToken($phone, $password)
     {
         if (empty($phone) || empty($password)) {
-            throw new \Exception('手机和密码不能为空');
+            throw new \Exception('缺失必要参数');
         }
         return $this->request('/index/get-app-token', ['app_key' => $this->app_key, 'phone' => $phone, 'password' => $password]);
     }
@@ -30,7 +30,7 @@ class ApiIndex extends UcApi
     public function getAppToken($app_secret)
     {
         if (empty($app_secret)) {
-            throw new \Exception('Secret 不能为空');
+            throw new \Exception('缺失必要参数');
         }
         return $this->request('/index/get-app-token', ['app_key' => $this->app_key, 'app_secret' => $app_secret]);
     }

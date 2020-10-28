@@ -4,6 +4,13 @@ namespace ZengJJ\UcClient;
 
 class WorkCorpMsg
 {
+    const APP_INTERNAL_NO = 0;
+    const APP_INTERNAL_YES = 1;
+    const APP_INTERNAL_NAMES = [
+        self::APP_INTERNAL_YES => '同应用',
+        self::APP_INTERNAL_NO => '跨应用',
+    ];
+
     const MSG_OBJECT_TEXT = '\EasyWeChat\Kernel\Messages\Text';
     const MSG_OBJECT_TEXT_PROPERTIES = [
         'content' => '内容'

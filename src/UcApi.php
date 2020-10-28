@@ -20,27 +20,6 @@ class UcApi extends ObjectBase
     }
 
     /**
-     * 错误上报
-     * @param $content
-     * @param array $data
-     * @param string $category
-     * @param int $level
-     * @return array
-     * @throws \Exception
-     */
-    public function reportError($content, $data = array(), $category = 'global', $level = 1)
-    {
-        return $this->request('/index/error-log', [
-            "app_key" => $this->app_key,
-            "host" => $_SERVER['HTTP_HOST'],
-            "content" => $content ?: '错误',
-            "data" => $data,
-            "category" => $category,
-            "level" => $level
-        ], 'POST');
-    }
-
-    /**
      * 请求
      * @param $uri
      * @param array $params

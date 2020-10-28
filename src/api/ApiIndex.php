@@ -6,8 +6,40 @@ use ZengJJ\UcClient\UcApi;
 
 class ApiIndex extends UcApi
 {
-    public function getUserToken()
+    /**
+     * 错误上报
+     * @param $content
+     * @param array $data
+     * @param string $category
+     * @param int $level
+     * @return array
+     * @throws \Exception
+     */
+    public function reportError($content, $data = array(), $category = 'global', $level = 1)
     {
+        return $this->request('/index/error-log', [
+            "app_key" => $this->app_key,
+            "host" => $_SERVER['HTTP_HOST'],
+            "content" => $content ?: '错误',
+            "data" => $data,
+            "category" => $category,
+            "level" => $level
+        ], 'POST');
+    }
+
+    /**
+     * 通过账户密码获取用户 TOKEN
+     * @param $phone
+     * @param $password
+     * @return array
+     * @throws \Exception
+     */
+    public function getUserToken($phone, $password)
+    {
+        if (empty($phone) || empty($password)) {
+            throw new \Exception('手机和密码不能为空');
+        }
+        return $this->request('/index/get-app-token', ['app_key' => $this->app_key, 'phone' => $phone, 'password' => $password]);
     }
 
     /**

@@ -7,29 +7,6 @@ use ZengJJ\UcClient\UcApi;
 class ApiUser extends UcApi
 {
     /**
-     * 发送消息
-     * @param $token
-     * @param $to_app_key
-     * @param $to_user_key
-     * @param $content
-     * @return array
-     * @throws \Exception
-     */
-    public function sendMsg($token, $to_app_key, $to_user_key, $content)
-    {
-        if (empty($token)) {
-            throw new \Exception('缺失必要参数');
-        }
-        return $this->request('/user/send-msg', [
-            'app_key' => $this->app_key,
-            'token' => $token,
-            'to_app_key' => $to_app_key,
-            'to_user_key' => $to_user_key,
-            'content' => $content,
-        ]);
-    }
-
-    /**
      * 同步用户密码
      * @param $token
      * @param $pwd

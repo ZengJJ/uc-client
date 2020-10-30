@@ -33,27 +33,24 @@ class ApiApp extends UcApi
         ]);
     }
 
-
     /**
-     * 反向同步用户数据
+     * 站内消息推送
      * @param $app_token
      * @param $phone
-     * @param $password
-     * @param array $more
+     * @param $data
      * @return array
      * @throws \Exception
      */
-    public function reverseSyncUser($app_token, $phone, $password, $more = [])
+    public function sendMsg($app_token, $phone, $data)
     {
-        if (empty($app_token) || empty($phone) || empty($password)) {
+        if (empty($app_token) || empty($phone) || empty($data)) {
             throw new \Exception('缺失必要参数');
         }
 
-        return $this->request('/app/reverse-sync-user', [
-            'app_token' => $app_token,
+        return $this->request('/app/send-msg', [
+            'app_key' => $app_token,
             'phone' => $phone,
-            'password' => $password,
-            'more' => $more
+            'data' => $data,
         ]);
     }
 
@@ -81,6 +78,29 @@ class ApiApp extends UcApi
                 'object' => $object,
                 'properties' => $properties,
             ]
+        ]);
+    }
+
+    /**
+     * 反向同步用户数据
+     * @param $app_token
+     * @param $phone
+     * @param $password
+     * @param array $more
+     * @return array
+     * @throws \Exception
+     */
+    public function reverseSyncUser($app_token, $phone, $password, $more = [])
+    {
+        if (empty($app_token) || empty($phone) || empty($password)) {
+            throw new \Exception('缺失必要参数');
+        }
+
+        return $this->request('/app/reverse-sync-user', [
+            'app_token' => $app_token,
+            'phone' => $phone,
+            'password' => $password,
+            'more' => $more
         ]);
     }
 }

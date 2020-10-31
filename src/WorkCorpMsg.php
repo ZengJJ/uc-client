@@ -12,10 +12,10 @@ class WorkCorpMsg
     ];
 
     const MSG_OBJECT_TEXT = '\EasyWeChat\Kernel\Messages\Text';
-    const MSG_OBJECT_TEXT_PROPERTIES = '内容';
+    const MSG_PROPERTIES_TEXT = '内容';
 
     const MSG_OBJECT_TEXT_CARD = '\EasyWeChat\Kernel\Messages\TextCard';
-    const MSG_OBJECT_TEXT_CARD_PROPERTIES = [
+    const MSG_PROPERTIES_TEXT_CARD = [
         'title' => '标题',
         'description' => '描述',
         'url' => '链接'

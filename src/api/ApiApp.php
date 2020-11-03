@@ -48,7 +48,7 @@ class ApiApp extends UcApi
         }
 
         return $this->request('/app/send-msg', [
-            'app_key' => $app_token,
+            'app_token' => $app_token,
             'phone' => $phone,
             'data' => $data,
         ]);

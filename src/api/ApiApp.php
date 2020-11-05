@@ -7,6 +7,17 @@ use ZengJJ\UcClient\WorkCorpMsg;
 
 class ApiApp extends UcApi
 {
+    public function workCorpList($app_token)
+    {
+        if (empty($app_token)) {
+            throw new \Exception('缺失必要参数');
+        }
+
+        return $this->request('/app/work-corp-list', [
+            'app_token' => $app_token,
+        ]);
+    }
+
     /**
      * 极光推送
      * @param $app_token

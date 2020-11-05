@@ -48,7 +48,7 @@ class UcApi extends ObjectBase
      * @return array
      * @throws \Exception
      */
-    public function request($uri, $params = array(), $method = 'GET')
+    public function request($uri, $params = array(), $method = 'POST')
     {
         $response = $this->client->request($method, $this->getUrl($uri), [
             'form_params' => $params

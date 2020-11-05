@@ -19,6 +19,25 @@ class ApiApp extends UcApi
     }
 
     /**
+     * 删除极光别名
+     * @param $app_token
+     * @param $alias
+     * @return array
+     * @throws \Exception
+     */
+    public function jgDelAlias($app_token, $alias)
+    {
+        if (empty($app_token) || empty($alias)) {
+            throw new \Exception('缺失必要参数');
+        }
+
+        return $this->request('/app/jg-del-alias', [
+            'app_token' => $app_token,
+            'alias' => $alias,
+        ]);
+    }
+
+    /**
      * 极光推送
      * @param $app_token
      * @param string $content 内容
@@ -69,13 +88,14 @@ class ApiApp extends UcApi
      * 推送企业微信消息
      * @param $app_token
      * @param $phone
+     * @param $work_corp_id
      * @param string $object
      * @param string[] $properties
      * @param $internal
      * @return array
      * @throws \Exception
      */
-    public function sendWorkCorpMsg($app_token, $phone, $object = WorkCorpMsg::MSG_OBJECT_TEXT, $properties = WorkCorpMsg::MSG_PROPERTIES_TEXT, $internal = WorkCorpMsg::APP_INTERNAL_YES)
+    public function sendWorkCorpMsg($app_token, $phone, $work_corp_id = 0, $object = WorkCorpMsg::MSG_OBJECT_TEXT, $properties = WorkCorpMsg::MSG_PROPERTIES_TEXT, $internal = WorkCorpMsg::APP_INTERNAL_YES)
     {
         if (empty($app_token) || empty($phone)) {
             throw new \Exception('缺失必要参数');
@@ -83,6 +103,7 @@ class ApiApp extends UcApi
 
         return $this->request('/app/send-work-corp-msg', [
             'app_token' => $app_token,
+            'work_corp_id' => $work_corp_id,
             'internal' => $internal,
             'phone' => $phone,
             'data' => [

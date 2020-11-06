@@ -94,14 +94,14 @@ class ApiApp extends UcApi
      * 推送企业微信消息
      * @param $app_token
      * @param $phone
-     * @param $work_corp_id
      * @param string $object
      * @param string[] $properties
+     * @param $work_corp_id
      * @param $internal
      * @return array
      * @throws \Exception
      */
-    public function sendWorkCorpMsg($app_token, $phone, $work_corp_id = 0, $object = WorkCorpMsg::MSG_OBJECT_TEXT, $properties = WorkCorpMsg::MSG_PROPERTIES_TEXT, $internal = WorkCorpMsg::APP_INTERNAL_YES)
+    public function sendWorkCorpMsg($app_token, $phone, $object = WorkCorpMsg::MSG_OBJECT_TEXT, $properties = WorkCorpMsg::MSG_PROPERTIES_TEXT, $work_corp_id = 0, $internal = WorkCorpMsg::APP_INTERNAL_YES)
     {
         if (empty($app_token) || empty($phone)) {
             throw new \Exception('缺失必要参数');

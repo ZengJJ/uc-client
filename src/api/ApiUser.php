@@ -40,6 +40,23 @@ class ApiUser extends UcApi
     }
 
     /**
+     * 获取已使用企业列表
+     * @param $token
+     * @return array
+     * @throws \Exception
+     */
+    public function workCorpList($token)
+    {
+        if (empty($token)) {
+            throw new \Exception('缺失必要参数');
+        }
+
+        return $this->request('/user/work-corp-list', [
+            'token' => $token,
+        ]);
+    }
+
+    /**
      * 同步用户密码
      * @param $token
      * @param $pwd

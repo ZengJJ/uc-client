@@ -7,6 +7,12 @@ use ZengJJ\UcClient\WorkCorpMsg;
 
 class ApiApp extends UcApi
 {
+    /**
+     * 获取已授权企业列表
+     * @param $app_token
+     * @return array
+     * @throws \Exception
+     */
     public function workCorpList($app_token)
     {
         if (empty($app_token)) {

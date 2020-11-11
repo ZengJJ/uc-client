@@ -2,8 +2,8 @@
 
 namespace ZengJJ\UcClient\api;
 
+use ZengJJ\UcClient\NoticeMsg;
 use ZengJJ\UcClient\UcApi;
-use ZengJJ\UcClient\WorkCorpMsg;
 
 class ApiApp extends UcApi
 {
@@ -48,11 +48,13 @@ class ApiApp extends UcApi
      * @param $app_token
      * @param string $content 内容
      * @param string $alias 别名（一般为手机号）
+     * @param string $jg_key
+     * @param string $jg_secret
      * @param string $registration_id 极光分配的ID
      * @return array
      * @throws \Exception
      */
-    public function jgPush($app_token, $content, $alias = null, $registration_id = null)
+    public function jgPush($app_token, $content, $alias = null, $jg_key = null, $jg_secret = null, $registration_id = null)
     {
         if (empty($app_token) || empty($content)) {
             throw new \Exception('缺失必要参数');
@@ -64,26 +66,28 @@ class ApiApp extends UcApi
         return $this->request('/app/jg-push', [
             'app_token' => $app_token,
             'registration_id' => $registration_id,
+            'jg_key' => $jg_key,
+            'jg_secret' => $jg_secret,
             'alias' => $alias,
             'content' => $content
         ]);
     }
 
     /**
-     * 站内消息推送
+     * 站内通知消息推送
      * @param $app_token
      * @param $phone
      * @param $data
      * @return array
      * @throws \Exception
      */
-    public function sendMsg($app_token, $phone, $data)
+    public function sendNoticeMsg($app_token, $phone, $data = NoticeMsg::MSG_UNIVERSAL_STRUCTURE)
     {
         if (empty($app_token) || empty($phone) || empty($data)) {
             throw new \Exception('缺失必要参数');
         }
 
-        return $this->request('/app/send-msg', [
+        return $this->request('/app/send-notice-msg', [
             'app_token' => $app_token,
             'phone' => $phone,
             'data' => $data,
@@ -101,7 +105,7 @@ class ApiApp extends UcApi
      * @return array
      * @throws \Exception
      */
-    public function sendWorkCorpMsg($app_token, $phone, $object = WorkCorpMsg::MSG_OBJECT_TEXT, $properties = WorkCorpMsg::MSG_PROPERTIES_TEXT, $work_corp_id = 0, $internal = WorkCorpMsg::APP_INTERNAL_YES)
+    public function sendWorkCorpMsg($app_token, $phone, $object = NoticeMsg::MSG_WORK_CORP_OBJECT_TEXT, $properties = NoticeMsg::MSG_WORK_CORP_PROPERTIES_TEXT, $work_corp_id = 0, $internal = NoticeMsg::APP_INTERNAL_YES)
     {
         if (empty($app_token) || empty($phone)) {
             throw new \Exception('缺失必要参数');

@@ -93,4 +93,42 @@ class ApiUser extends UcApi
             'pwd' => $pwd
         ]);
     }
+
+    /**
+     * 获取站内消息列表
+     * @param $token
+     * @return array
+     * @throws \Exception
+     */
+    public function getNoticeMsgList($token, $page = 1, $num = 10)
+    {
+        if (empty($token)) {
+            throw new \Exception('缺失必要参数');
+        }
+        return $this->request('/user/get-notice-msg-list', [
+            'app_key' => $this->app_key,
+            'token' => $token,
+            'page' => $page,
+            'num' => $num
+        ]);
+    }
+
+    /**
+     * 修改通知消息的读取状态
+     * @param $token
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function readNoticeMsg($token, $id)
+    {
+        if (empty($token)) {
+            throw new \Exception('缺失必要参数');
+        }
+        return $this->request('/user/read-notice-msg', [
+            'app_key' => $this->app_key,
+            'token' => $token,
+            'id' => $id,
+        ]);
+    }
 }

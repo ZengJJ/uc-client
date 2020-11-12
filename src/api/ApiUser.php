@@ -95,7 +95,7 @@ class ApiUser extends UcApi
     }
 
     /**
-     * 获取站内消息列表
+     * 获取站内通知消息列表
      * @param $token
      * @return array
      * @throws \Exception
@@ -114,7 +114,7 @@ class ApiUser extends UcApi
     }
 
     /**
-     * 修改通知消息的读取状态
+     * 获取并修改站内通知消息的读取状态
      * @param $token
      * @param $id
      * @return array

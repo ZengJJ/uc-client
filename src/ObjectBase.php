@@ -96,4 +96,13 @@ class ObjectBase
 
         return $pageURL;
     }
+
+    /**
+     * 获取当前域名
+     * @return string
+     */
+    public function currentHost()
+    {
+        return ($this->isHttps() ? 'https' : 'http') . "://" . $_SERVER["SERVER_NAME"];
+    }
 }

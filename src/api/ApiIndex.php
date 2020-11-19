@@ -34,4 +34,21 @@ class ApiIndex extends UcApi
         }
         return $this->request('/index/get-app-token', ['app_key' => $this->app_key, 'app_secret' => $app_secret]);
     }
+
+    /**
+     * 应用生成 （项目初始化时使用）
+     * @return array
+     * @throws \Exception
+     */
+    public function appGenerate($phone, $password, $name, $hosts, $desc = '', $logo = '')
+    {
+        return $this->request('/index/app-generate', [
+            'phone' => $phone,
+            'password' => $password,
+            'name' => $name,
+            'hosts' => $hosts,
+            'desc' => $desc,
+            'logo' => $logo,
+        ]);
+    }
 }

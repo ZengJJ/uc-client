@@ -8,6 +8,23 @@ use ZengJJ\UcClient\UcApi;
 class ApiApp extends UcApi
 {
     /**
+     * 检测TOKEN是否有效
+     * @param $app_token
+     * @return array|string
+     * @throws \Exception
+     */
+    public function checkToken($app_token)
+    {
+        if (empty($app_token)) {
+            throw new \Exception('缺失必要参数');
+        }
+
+        return $this->request('/app/check-token', [
+            'app_token' => $app_token,
+        ]);
+    }
+
+    /**
      * 获取已授权企业列表
      * @param $app_token
      * @return array

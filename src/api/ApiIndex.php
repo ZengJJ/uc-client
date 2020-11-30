@@ -2,6 +2,7 @@
 
 namespace ZengJJ\UcClient\api;
 
+use ZengJJ\UcClient\AppParams;
 use ZengJJ\UcClient\UcApi;
 
 class ApiIndex extends UcApi
@@ -37,6 +38,13 @@ class ApiIndex extends UcApi
 
     /**
      * 应用生成 （项目初始化时使用）
+     * @param $phone
+     * @param $password
+     * @param $name
+     * @param $hosts
+     * @param int $type 参考值 AppParams::TYPE_NAMES
+     * @param string $desc
+     * @param string $logo
      * @return array
      * @throws \Exception
      */

@@ -40,13 +40,14 @@ class ApiIndex extends UcApi
      * @return array
      * @throws \Exception
      */
-    public function appGenerate($phone, $password, $name, $hosts, $desc = '', $logo = '')
+    public function appGenerate($phone, $password, $name, $hosts, $type, $desc = '', $logo = '')
     {
         return $this->request('/index/app-generate', [
             'phone' => $phone,
             'password' => $password,
             'name' => $name,
             'hosts' => $hosts,
+            'type' => $type,
             'desc' => $desc,
             'logo' => $logo,
         ]);

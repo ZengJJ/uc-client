@@ -162,4 +162,31 @@ class ApiApp extends UcApi
             'more' => $more
         ]);
     }
+
+    /**
+     * 发送模板消息
+     * @param $app_token
+     * @param $phone
+     * @param $template_id
+     * @param array $data
+     * @param null $url
+     * @return array
+     * @throws \Exception
+     */
+    public function actionSendMpTmplMsg($app_token, $phone, $template_id, array $data, $url = null)
+    {
+        if (empty($app_token) || empty($phone) || empty($template_id) || empty($data)) {
+            throw new \Exception('缺失必要参数');
+        }
+
+        return $this->request('/app/r/send-mp-tmpl-msg', [
+            'app_token' => $app_token,
+            'phone' => $phone,
+            'data' => [
+                'template_id' => $template_id,
+                'url' => $url,
+                'data' => $data
+            ]
+        ]);
+    }
 }

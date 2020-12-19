@@ -164,6 +164,31 @@ class ApiApp extends UcApi
     }
 
     /**
+     * 发送短信消息
+     * @param $app_token
+     * @param $phone
+     * @param $template_id
+     * @param array $data
+     * @return array
+     * @throws \Exception
+     */
+    public function sendSms($app_token, $phone, $template_id, array $data)
+    {
+        if (empty($app_token) || empty($phone) || empty($template_id) || empty($data)) {
+            throw new \Exception('缺失必要参数');
+        }
+
+        return $this->request('/app/send-sms', [
+            'app_token' => $app_token,
+            'phone' => $phone,
+            'data' => [
+                'template_id' => $template_id,
+                'data' => $data
+            ]
+        ]);
+    }
+
+    /**
      * 发送模板消息
      * @param $app_token
      * @param $phone

@@ -179,7 +179,7 @@ class ApiApp extends UcApi
             throw new \Exception('缺失必要参数');
         }
 
-        return $this->request('/app/r/send-mp-tmpl-msg', [
+        return $this->request('/app/send-mp-tmpl-msg', [
             'app_token' => $app_token,
             'phone' => $phone,
             'data' => [

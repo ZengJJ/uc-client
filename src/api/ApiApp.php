@@ -173,7 +173,7 @@ class ApiApp extends UcApi
      * @return array
      * @throws \Exception
      */
-    public function actionSendMpTmplMsg($app_token, $phone, $template_id, array $data, $url = null)
+    public function sendMpTmplMsg($app_token, $phone, $template_id, array $data, $url = null)
     {
         if (empty($app_token) || empty($phone) || empty($template_id) || empty($data)) {
             throw new \Exception('缺失必要参数');

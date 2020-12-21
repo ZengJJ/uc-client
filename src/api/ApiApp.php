@@ -169,13 +169,17 @@ class ApiApp extends UcApi
      * @param $phone
      * @param $template_id
      * @param array $data
+     * @param $third
      * @return array
      * @throws \Exception
      */
-    public function sendSms($app_token, $phone, $template_id, array $data)
+    public function sendSms($app_token, $phone, $template_id, array $data, $third = NoticeMsg::SMS_THIRD_SUB_MAIL)
     {
         if (empty($app_token) || empty($phone) || empty($template_id) || empty($data)) {
             throw new \Exception('缺失必要参数');
+        }
+        if (empty(NoticeMsg::SMS_THIRD_FUN_NAMES[$third])) {
+            throw new \Exception('未兼容的第三方短信运营商：' . $third);
         }
 
         return $this->request('/app/send-sms', [
@@ -183,6 +187,7 @@ class ApiApp extends UcApi
             'phone' => $phone,
             'data' => [
                 'template_id' => $template_id,
+                'third' => $third,
                 'data' => $data
             ]
         ]);

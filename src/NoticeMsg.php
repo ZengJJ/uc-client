@@ -28,4 +28,11 @@ class NoticeMsg
         'send_key' => '推送组件的key', // 非必要
         'send_secret' => '推送组件的secret', // 非必要
     ];
+
+    const SMS_THIRD_ALI = 1;
+    const SMS_THIRD_SUB_MAIL = 2;
+    const SMS_THIRD_FUN_NAMES = [
+        self::SMS_THIRD_ALI => 'easySmsAli', // 阿里云
+        self::SMS_THIRD_SUB_MAIL => 'easySmsSubmail', // 塞邮
+    ];
 }

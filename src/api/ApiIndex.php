@@ -19,7 +19,7 @@ class ApiIndex extends UcApi
         if (empty($phone) || empty($password)) {
             throw new \Exception('缺失必要参数');
         }
-        return $this->request('/index/get-app-token', ['app_key' => $this->app_key, 'phone' => $phone, 'password' => $password]);
+        return $this->request('/index/get-user-token', ['app_key' => $this->app_key, 'phone' => $phone, 'password' => $password]);
     }
 
     /**

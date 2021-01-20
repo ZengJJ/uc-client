@@ -41,14 +41,14 @@ class UcApi extends ObjectBase
     }
 
     /**
-     * 请求
      * @param $uri
      * @param array $params
      * @param string $method
-     * @return array
-     * @throws \Exception
+     * @param bool $manual_handle
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request($uri, $params = array(), $method = 'POST')
+    public function request($uri, $params = array(), $method = 'POST', $manual_handle = false)
     {
         $response = $this->client->request($method, $this->getUrl($uri), [
             'form_params' => $params
@@ -61,8 +61,14 @@ class UcApi extends ObjectBase
             throw new \Exception('请求错误：' . $response->getStatusCode());
         }
         $result = json_decode($response->getBody(), true);
-        if (empty($result) || $result['code'] != 0) {
-            throw new \Exception(empty($result['message']) ? '数据有误' : $result['message']);
+        if (empty($result)) {
+            throw new \Exception('数据有误');
+        }
+        if ($manual_handle) { // 手动处理反馈结果
+            return $result;
+        }
+        if ($result['code'] != 0) {
+            throw new \Exception(empty($result['message']) ? '处理失败' : $result['message']);
         }
 
         return $result['data'];

@@ -37,6 +37,25 @@ class ApiIndex extends UcApi
     }
 
     /**
+     * 应用检测
+     * @param $phone
+     * @param $password
+     * @param $name
+     * @param $type
+     * @return array
+     * @throws \Exception
+     */
+    public function checkAppExists($phone, $password, $name, $type)
+    {
+        return $this->request('/index/check-app-exists', [
+            'phone' => $phone,
+            'password' => $password,
+            'name' => $name,
+            'type' => $type,
+        ]);
+    }
+
+    /**
      * 应用生成 （项目初始化时使用）
      * @param $phone
      * @param $password

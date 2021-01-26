@@ -11,9 +11,9 @@ class NoticeMsg
         self::APP_INTERNAL_NO => '跨应用',
     ];
 
+    // 企业微信消息
     const MSG_WORK_CORP_OBJECT_TEXT = '\EasyWeChat\Kernel\Messages\Text';
     const MSG_WORK_CORP_PROPERTIES_TEXT = '内容';
-
     const MSG_WORK_CORP_OBJECT_TEXT_CARD = '\EasyWeChat\Kernel\Messages\TextCard';
     const MSG_WORK_CORP_PROPERTIES_TEXT_CARD = [
         'title' => '标题',
@@ -21,6 +21,7 @@ class NoticeMsg
         'url' => '链接'
     ];
 
+    // 站内消息
     const MSG_UNIVERSAL_STRUCTURE = [
         'content' => '子应用消息展示内容',
         'voice' => '推送的语音播报内容',
@@ -29,6 +30,7 @@ class NoticeMsg
         'send_secret' => '推送组件的secret', // 非必要
     ];
 
+    // 短信
     const SMS_THIRD_ALI = 1;
     const SMS_THIRD_SUB_MAIL = 2;
     const SMS_THIRD_FUN_NAMES = [

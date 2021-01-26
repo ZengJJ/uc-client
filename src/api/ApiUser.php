@@ -95,6 +95,48 @@ class ApiUser extends UcApi
     }
 
     /**
+     * 平台密码通过应用密码重置
+     * @param $token
+     * @param $app_pwd
+     * @param null $platform_pwd // 若为空，密码将随机生成
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function resetPlatformPwdByAppPwd($token, $app_pwd, $platform_pwd = null)
+    {
+        if (empty($token) || empty($app_pwd)) {
+            throw new \Exception('缺失必要参数');
+        }
+        return $this->request('/user/reset-platform-pwd-by-app-pwd', [
+            'app_key' => $this->app_key,
+            'token' => $token,
+            'app_pwd' => $app_pwd,
+            'platform_pwd' => $platform_pwd,
+        ]);
+    }
+
+    /**
+     * 平台密码校验与修改 (同步密码为空则仅校验)
+     * @param $token
+     * @param $check_pwd
+     * @param null $update_pwd
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function platformPwd($token, $check_pwd, $update_pwd = null)
+    {
+        if (empty($token) || empty($check_pwd)) {
+            throw new \Exception('缺失必要参数');
+        }
+        return $this->request('/user/platform-pwd', [
+            'app_key' => $this->app_key,
+            'token' => $token,
+            'check_pwd' => $check_pwd,
+            'update_pwd' => $update_pwd,
+        ]);
+    }
+
+    /**
      * 获取站内通知消息列表
      * @param $token
      * @return array
